@@ -2,6 +2,11 @@
 
 Tool to convert yolo format dataset to labelme json format.
 
+## Installation
+```bash
+pip install yolo2labelme
+```
+## Usage
 ### CLI Usage:
 
 Following command creates labelme json dataset directory at `path/to/yolo/labelmeDataset` from `path/to/yolo/dataset` dataset directory.
@@ -29,5 +34,6 @@ Or simply
 from yolo2labelme import y2l
 y2l('path/to/dataset')
 ```
-### Source code
+## Useful links
 https://github.com/kadapallaNithin/yolo2labelme
+https://pypi.org/project/yolo2labelme/
