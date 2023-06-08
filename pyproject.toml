@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yolo2labelme"
+version = "0.0.4"
+authors = [
+  { name="Kadapalla Nithin Kumar", email="kadapallanithin@gmail.com" },
+]
+description = "Tool to convert yolo format dataset to labelme json format."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/kadapallaNithin/yolo2labelme"
+"Bug Tracker" = "https://github.com/kadapallaNithin/yolo2labelme/issues"

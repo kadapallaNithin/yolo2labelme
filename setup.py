@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='yolo2labelme',
-    version='0.0.2',
+    version='0.0.4',
     py_modules=['yolo2labelme'],
     entry_points={
         'console_scripts': [
