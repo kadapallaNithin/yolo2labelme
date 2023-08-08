@@ -67,22 +67,30 @@ def yolo2labelme_single(txt_path, img_path, class_labels, out_dir):
         f.write(json.dumps(result))
     shutil.copyfile(img_path, os.path.join(out_dir, img_filename) )
 
-def yolo2labelme(data_dir, out_dir=None):
-    yaml_path = os.path.join(data_dir,"dataset.yaml")
+def yolo2labelme(data, out=None, skip=False):
+    yaml_path = os.path.join(data,"dataset.yaml")
     with open(yaml_path, 'r') as stream:
         data_loaded = yaml.safe_load(stream)
         class_labels = data_loaded['names']
 
-    if out_dir is None:
-        out_dir = os.path.join(os.path.abspath(data_dir),'..','labelmeDataset')
+    if out is None:
+        out = os.path.join(os.path.abspath(data),'..','labelmeDataset')
     for dir_type in ['test', 'train','val']:
-        dir_path = os.path.join(data_loaded[dir_type])
+        dir_path = os.path.join(data, data_loaded[dir_type])
+        dir_path = os.path.abspath(dir_path)
         for filename in os.listdir(dir_path):
             img_file = os.path.join(dir_path,filename)
             if is_image_file(img_file):
                 txt_file = img_filename_to_ext(img_file.replace('images','labels'), '.txt')
-
-                yolo2labelme_single(txt_file, img_file, class_labels, out_dir)
+                if os.path.exists(txt_file):
+                    yolo2labelme_single(txt_file, img_file, class_labels, out)
+                else:
+                    if skip == False:
+                        raise FileNotFoundError(f"{txt_file} is expected to exist."
+                                                +"Pass skip=True to skip silently.\n"
+                                                +"skip='print' to print missed paths.")
+                    elif skip == 'print':
+                        print(f'Missing {txt_file}')
 
 y2l = yolo2labelme
 
@@ -90,8 +98,9 @@ def main():
     argparser = argparse.ArgumentParser()
     argparser.add_argument('data')
     argparser.add_argument('--out', default=None, required=False)
+    argparser.add_argument('--skip', default=False, required=False)
     args = argparser.parse_args()
-    yolo2labelme(args.data, args.out)
+    yolo2labelme(args.data, args.out, args.skip)
 
 if __name__ == '__main__':
     main()
