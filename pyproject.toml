@@ -4,13 +4,19 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yolo2labelme"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
   { name="Kadapalla Nithin Kumar", email="kadapallanithin@gmail.com" },
 ]
 description = "Tool to convert yolo format dataset to labelme json format."
 readme = "README.md"
 requires-python = ">=3.7"
+
+dependencies = [
+    "Pillow",
+    "PyYAML",
+]
+
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
