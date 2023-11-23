@@ -12,7 +12,7 @@ def tobase64(file_path):
 
 def img_filename_to_ext(img_filename, ext='txt'):
     for img_ext in image_extensions:
-        if img_filename.endswith(img_ext):
+        if img_filename.lower().endswith(img_ext):
             return img_filename[:-len(img_ext)] + ext
 
 def is_image_file(file_path):
